@@ -50,6 +50,10 @@ def input_page(request):
     # Add view for the input page
     return render(request, 'main.html')
 
+def feedback(request):
+    # Add view for the input page
+    
+    return render(request, 'feedback.html')
 
 @login_required(login_url='login')
 def output_page(request):

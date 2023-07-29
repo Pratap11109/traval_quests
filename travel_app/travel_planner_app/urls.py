@@ -10,4 +10,5 @@ urlpatterns = [
     path('automated/', views.automated_plan, name='automated'),
     path('customized/', views.customized_plan, name='customized'),
     path('trip-with-strangers/', views.trip_with_strangers, name='trip_with_strangers'),
+    path('feedback/', views.feedback, name='feedback'),
 ]
