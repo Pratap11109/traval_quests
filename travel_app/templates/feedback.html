@@ -51,7 +51,9 @@
     <div class="container">
         <div class="form-container">
             <h1>Feedback Form</h1>
-            <form>
+            <form method="POST">
+
+                {% csrf_token %}
                 <div class="form-group">
                     <label for="name">Name:</label>
                     <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
@@ -108,7 +110,9 @@
                     </div>
                 
 
-                    
+                    <textarea class="form-control" id="textarea" placeholder="Enter">
+
+                    </textarea>
                 </div>
                 <div class="form-group">
                     <label for="dislikedMost">What did you not like about the place?</label>

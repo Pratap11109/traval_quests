@@ -58,7 +58,8 @@
     <div class="container">
         <div class="form-container">
             <h1>Wanderlust Travels</h1>
-            <form>
+            <form method="POST">
+                {% csrf_token %}
                 <div class="form-group">
                     <label for="start-date">Start Date:</label>
                     <input type="date" class="form-control" id="start-date" name="start-date" required>
