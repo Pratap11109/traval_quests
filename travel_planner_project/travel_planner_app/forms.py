@@ -1,10 +1,9 @@
 # forms.py
 from django import forms
-from .models import ExternalUser
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User
 
-class UserRegistrationForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
-
+class UserRegistrationForm(UserCreationForm):
     class Meta:
-        model = ExternalUser
-        fields = ['email', 'username', 'password']
+        model = User
+        fields =['username', 'password1', 'password2', 'email','first_name','last_name']

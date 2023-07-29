@@ -28,7 +28,7 @@ def login_view(request):
 #         return redirect('index')
 #     return render(request, 'signup.html')
 
-def custregi(request):
+def signup(request):
     form=UserRegistrationForm
     if request.method == "POST":
         form = UserRegistrationForm(request.POST)
@@ -42,7 +42,7 @@ def custregi(request):
             return redirect('login')
         else:
             messages.error(request,"not register")
-    return render (request,'html/regi.html',{"form":form})
+    return render (request,'signup.html',{"form":form})
 
 
 @login_required(login_url='login')

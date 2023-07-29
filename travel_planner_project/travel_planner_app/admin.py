@@ -1,4 +1,4 @@
 from django.contrib import admin
-from .models import TravelGroup, ExternalUser, ExternalUserManager
+from travel_planner_app.models import TravelGroup
 # Register your models here.
-admin.site.register([ExternalUserManager, TravelGroup, ExternalUser])
+admin.site.register(TravelGroup)
