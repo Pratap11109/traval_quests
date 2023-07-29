@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import Group, User
 from django.contrib.auth.decorators import login_required
 from .models import BudgetPlanner
+from .forms import ReviewForm
 
 
 def index(request):
@@ -82,10 +83,36 @@ def input_page(request):
     # Add view for the input page
     return render(request, "main.html")
 
+
 def feedback(request):
     # Add view for the input page
-    
-    return render(request, 'feedback.html')
+    if request.method == "POST":
+        name = request.POST.get("name")
+        date_of_visit = request.POST.get("date")
+        rating = request.POST.get("rating")
+        liked_most = request.POST.getlist("likedMost")  # Get list of selected options
+        disliked_most = request.POST.getlist("dislikedMost")  # Get list of selected options
+        overall_experience = request.POST.get("overallExperience")
+
+        # Save the data to the Review model or perform other actions as needed
+        review = ReviewForm(
+            name=name,
+            date_of_visit=date_of_visit,
+            rating=rating,
+            liked_most=", ".join(liked_most),
+            disliked_most=", ".join(disliked_most),
+            overall_experience=overall_experience,
+        )
+        review.save()
+
+        # Print the review object (optional)
+        print(review)
+
+        # Redirect to a success page or do something else
+        return redirect("main")
+
+    return render(request, "feedback.html")
+    # return render(request, 'feedback.html')
 
 @login_required(login_url="login")
 def output_page(request):
