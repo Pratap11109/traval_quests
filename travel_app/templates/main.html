@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderlust Travels - Your Adventure Awaits!</title>
+    <!-- Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom CSS styling */
+        body {
+            background-image: url('../static/img/t4.jpeg');
+            background-size: cover;
+            background-position: center-bottom;
+            background-repeat: no-repeat;
+            background-color: #f5f5f5;
+            padding-top: 50px;
+        }
+
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .submit-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>Wanderlust Travels</h1>
+            <form>
+                <div class="form-group">
+                    <label for="start-date">Start Date:</label>
+                    <input type="date" class="form-control" id="start-date" name="start-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="end-date">End Date:</label>
+                    <input type="date" class="form-control" id="end-date" name="end-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="num-days">Number of Days:</label>
+                    <input type="number" class="form-control" id="num-days" name="num-days" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="theme">Theme:</label>
+                    <select class="form-control" id="theme" name="theme" required>
+                        <option value="mountains">Mountains</option>
+                        <option value="beaches">Beaches</option>
+                        <option value="roadtrip">Road Trip</option>
+                        <option value="temples">Temples</option>
+                        <option value="forts">Forts</option>
+                        <option value="any">Any</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="budget">Max Budget(Rs.):</label>
+                    <input type="number" class="form-control" id="budget" name="budget" min="0" step="500" required>
+                </div>
+                <button type="submit" class="submit-button">Plan My Adventure!</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
