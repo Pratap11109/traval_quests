@@ -51,7 +51,9 @@
     <div class="container">
         <div class="form-container">
             <h1>Review Form</h1>
-            <form>
+            <form method="POST">
+
+                {% csrf_token %}
                 <div class="form-group">
                     <label for="name">Name:</label>
                     <input type="text" id="name" class="form-control">
@@ -75,7 +77,7 @@
                         <option>Clean and Well-Maintained</option>
                     </select> -->
 
-                    <textarea class="form-control" placeholder="Enter">
+                    <textarea class="form-control" id="textarea" placeholder="Enter">
 
                     </textarea>
                 </div>
