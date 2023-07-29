@@ -1,0 +1,8 @@
+body {
+    /* Add the path to your background image */
+    background-image: url('../static/img/tr1.jpeg');
+    /* Set background size, position, and other properties as needed */
+    background-size: cover;
+    background-position: center-bottom;
+    background-repeat: no-repeat;
+}
