@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback</title>
+    <title>Wanderlust Travels - Your Adventure Awaits!</title>
     <!-- Bootstrap CSS link -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
@@ -50,65 +50,32 @@
 <body>
     <div class="container">
         <div class="form-container">
-            <h1>Feedback Form</h1>
+            <h1>Review Form</h1>
             <form method="POST">
 
                 {% csrf_token %}
                 <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+                    <label for="name">Name of place:</label>
+                    <input type="text" id="name_of_place" name="name_of_place" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="date">Date of Visit:</label>
-                    <input type="date" id="date" class="form-control">
+                    <input type="date" id="date" name="date" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="rating">Rating:</label>
-                    <input type="number" id="rating" class="form-control" placeholder="Give you rating (1-5)" min="1" max="5">
+                    <input type="number" id="rating" name="rating" class="form-control" min="1" max="5">
                 </div>
                 <div class="form-group">
                     <label for="likedMost">What did you like most about the place?</label>
-            
-                    <div class="checkbox-group">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="theme-mountains" name="theme" value="mountains">
-                            <label class="form-check-label" for="theme-mountains">
-                                Beautiful Scenery
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="theme-beaches" name="theme" value="beaches">
-                            <label class="form-check-label" for="theme-beaches">
-                                Good Value for Money
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="theme-roadtrip" name="theme" value="roadtrip">
-                            <label class="form-check-label" for="theme-roadtrip">
-                                Peaceful Environment
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="theme-adventure" name="theme" value="adventure">
-                            <label class="form-check-label" for="theme-adventure">
-                                Cozy Ambiance
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="theme-historical" name="theme" value="historical">
-                            <label class="form-check-label" for="theme-historical">
-                                Delicious Food
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="theme-theme-parks" name="theme" value="theme-parks">
-                            <label class="form-check-label" for="theme-theme-parks">
-                                Clean and Well-Maintained
-                            </label>
-                        </div>
-                       
-                    </div>
-                
+                    <select id="likedMost" name="likedMost" class="form-control" multiple>
+                        <option>Beautiful Scenery</option>
+                        <option>Good Value for Money</option>
+                        <option>Peaceful Environment</option>
+                        <option>Cozy Ambiance</option>
+                        <option>Delicious Food</option>
+                        <option>Clean and Well-Maintained</option>
+                    </select>
 
                     <textarea class="form-control" id="textarea" placeholder="Enter">
 
@@ -116,53 +83,23 @@
                 </div>
                 <div class="form-group">
                     <label for="dislikedMost">What did you not like about the place?</label>
-                    <div class="checkbox-group">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="theme-mount" name="theme" value="mount">
-                            <label class="form-check-label" for="theme-mount">
-                                Noisy Environment
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="theme-beach" name="theme" value="beach">
-                            <label class="form-check-label" for="theme-beach">
-                                Overpriced
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="theme-road" name="theme" value="road">
-                            <label class="form-check-label" for="theme-road">
-                                Bad Location
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="theme-advent" name="theme" value="advent">
-                            <label class="form-check-label" for="theme-advent">
-                                Poor Food Quality
-                            </label>
-                        </div>
-                        
-                    </div>
-                
+                    <select id="dislikedMost" name="dislikedMost" class="form-control" multiple >
+                        <option>Noisy Environment</option>
+                        <option>Overpriced</option>
+                        <option>Bad Location</option>
+                        <option>Poor Food Quality</option>
+                    </select>
                 </div>
-                
                 <div class="form-group">
                     <label for="overallExperience">Overall Experience:</label>
-                    <select id="overallExperience" class="form-control" required>
-                        <option value="" disabled selected>Give your overall experience</option>
+                    <select id="overallExperience" name="overallExperience" class="form-control">
                         <option>Excellent</option>
                         <option>Good</option>
                         <option>Average</option>
                         <option>Poor</option>
                     </select>
                 </div>
-
-                
-
-
-                
-                
-                <button type="submit" class="submit-button">Submit</button>
+                <button type="submit" class="submit-button" >Submit</button>
             </form>
         </div>
     </div>

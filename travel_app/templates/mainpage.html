@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Quest</title>
+    <title>Wanderlust Travels - Your Adventure Awaits!</title>
     <!-- Bootstrap CSS link -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
@@ -50,7 +50,7 @@
 <body>
     <div class="container">
         <div class="form-container">
-            <h1>Travel Quest</h1>
+            <h1>Wanderlust Travels</h1>
             <form>
                 <div class="form-group">
                     <label for="start-date">Start Date:</label>
@@ -62,60 +62,73 @@
                 </div>
                 <div class="form-group">
                     <label for="num-days">Number of Days:</label>
-                    <input type="number" class="form-control" id="num-days" name="num-days" min="1" placeholder="Select number of days" required>
+                    <input type="number" class="form-control" id="num-days" name="num-days" min="1" required>
                 </div>
+                <!-- <div class="form-group">
+                    <label for="theme">Theme:</label>
+                    <select class="form-control" id="theme" name="theme" multiple>
+                        <option value="mountains">Mountains</option>
+                        <option value="beaches">Beaches</option>
+                        <option value="roadtrip">Road Trip</option>
+                        <option value="temples">Temples</option>
+                        <option value="forts">Forts</option>
+                        <option value="any">Any</option>
+                    </select>
+                </div>
+                <div class="form-group"> -->
                     <div class="form-group">
                         <label for="theme">Themes:</label>
                         <div class="checkbox-group">
-                            <div class="form-check form-check-inline">
+                            <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="theme-mountains" name="theme" value="mountains">
                                 <label class="form-check-label" for="theme-mountains">
                                     Mountains
                                 </label>
                             </div>
-                            <div class="form-check form-check-inline">
+                            <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="theme-beaches" name="theme" value="beaches">
                                 <label class="form-check-label" for="theme-beaches">
                                     Beaches
                                 </label>
                             </div>
-                            <div class="form-check form-check-inline">
+                            <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="theme-roadtrip" name="theme" value="roadtrip">
                                 <label class="form-check-label" for="theme-roadtrip">
                                     Road Trip
                                 </label>
                             </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="theme-adventure" name="theme" value="adventure">
-                                <label class="form-check-label" for="theme-adventure">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="theme-roadtrip" name="theme" value="roadtrip">
+                                <label class="form-check-label" for="theme-roadtrip">
                                     Adventure and Nature
                                 </label>
                             </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="theme-historical" name="theme" value="historical">
-                                <label class="form-check-label" for="theme-historical">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="theme-roadtrip" name="theme" value="roadtrip">
+                                <label class="form-check-label" for="theme-roadtrip">
                                     Historical Sites
                                 </label>
                             </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="theme-theme-parks" name="theme" value="theme-parks">
-                                <label class="form-check-label" for="theme-theme-parks">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="theme-roadtrip" name="theme" value="roadtrip">
+                                <label class="form-check-label" for="theme-roadtrip">
                                     Theme Parks
                                 </label>
                             </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="theme-pilgrimage" name="theme" value="pilgrimage">
-                                <label class="form-check-label" for="theme-pilgrimage">
+                        
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="theme-roadtrip" name="theme" value="roadtrip">
+                                <label class="form-check-label" for="theme-roadtrip">
                                     Pilgrimage and Spiritual Journeys
                                 </label>
                             </div>
-                            
+                        
+                            <!-- Add more checkbox options as needed -->
                         </div>
                     </div>
-                    
                     <div class="form-group">
                     <label for="budget">Max Budget(Rs.):</label>
-                    <input type="number" class="form-control" id="budget" name="budget" placeholder="Enter you maximum budget" step="500" required>
+                    <input type="number" class="form-control" id="budget" name="budget" min="0" step="500" required>
                 </div>
                 <button type="submit" class="submit-button">Plan My Adventure!</button>
             </form>
