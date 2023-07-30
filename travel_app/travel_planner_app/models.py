@@ -12,11 +12,11 @@ class TravelGroup(models.Model):
 
 
 class BudgetPlanner(models.Model):
-    budget = models.DecimalField(max_digits=10, decimal_places=2)
-    theme = models.CharField(max_length=100)
-    num_days = models.PositiveIntegerField()
-    end_date = models.DateField()
-    start_date = models.DateField()
+    budget = models.DecimalField(max_digits=10, decimal_places=2, null=True, default=None)
+    theme = models.CharField(max_length=100, null=True, default=None)
+    num_days = models.PositiveIntegerField(null=True, default=None)
+    end_date = models.DateField(null=True, default=None)
+    start_date = models.DateField(null=True, default=None)
 
     def __str__(self):
         return f"{self.theme} - {self.end_date}"
@@ -56,4 +56,12 @@ class Review(models.Model):
 
     def __str__(self):
         return f"{self.name_of_place}'s Review"
+    
+class UserSignup(models.Model):
+    username = models.CharField(max_length=150)
+    password = models.CharField(max_length=128)
+    # Add any other fields you want to capture during user signup
+
+    def __str__(self):
+        return self.username
     

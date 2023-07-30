@@ -18,6 +18,21 @@ def index(request):
 
 def login_view(request):
     # Add view for the login page
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                # Redirect to the home page or any other page after successful login
+                return redirect("main_page")
+            else:
+                return redirect("login")
+    else:
+        form = AuthenticationForm()
     return render(request, "login.html")
 
 
@@ -62,19 +77,17 @@ def main_page(request):
 
 
 def signup(request):
-    form = UserRegistrationForm
+    form = UserRegistrationForm()
     if request.method == "POST":
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            group = Group.objects.get(name="Customer")
-            user.groups.add(group)
+            form.save()  # Save the user registration data to the UserSignup model
 
             username = form.cleaned_data.get("username")
-            messages.success(request, "New account created:" + username)
+            messages.success(request, "New account created: " + username)
             return redirect("login")
         else:
-            messages.error(request, "not register")
+            messages.error(request, "Not registered")
     return render(request, "signup.html", {"form": form})
 
 
@@ -83,13 +96,11 @@ def input_page(request):
     # Add view for the input page
     return render(request, "main.html")
 
-
+@login_required(login_url="login")
 def feedback(request):
     # Add view for the input page
     if request.method == "POST":
-        print("Inside post")
         name_of_place = request.POST.get("name_of_place")
-        print(name_of_place)
         date_of_visit = request.POST.get("date")
         rating = request.POST.get("rating")
         liked_most = request.POST.getlist("likedMost")  # Get list of selected options
@@ -108,10 +119,9 @@ def feedback(request):
         review.save()
 
         # Redirect to a success page or do something else
-        return redirect("main_page")
+        return render(request, "main.html")
 
     return render(request, "feedback.html")
-    # return render(request, 'feedback.html')
 
 @login_required(login_url="login")
 def output_page(request):
