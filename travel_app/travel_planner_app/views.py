@@ -55,10 +55,12 @@ def main_page(request):
         end_date = request.POST.get("end-date")
         num_days = request.POST.get("num-days")
         theme = request.POST.get("theme")
+        current_location = request.POST.get(current_location)
         budget = request.POST.get("budget")
         budget_plan = {
             "budget": budget,
             "theme": theme,
+            "current_location": current_location,
             "num_days": num_days,
             "end_date": end_date,
             "start_date": start_date
