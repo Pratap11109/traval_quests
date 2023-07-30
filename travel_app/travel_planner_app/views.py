@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import Group, User
 from django.contrib.auth.decorators import login_required
-from .models import BudgetPlanner
+from .models import BudgetPlanner, Review
 from .forms import ReviewForm
 
 
@@ -87,7 +87,9 @@ def input_page(request):
 def feedback(request):
     # Add view for the input page
     if request.method == "POST":
-        name = request.POST.get("name")
+        print("Inside post")
+        name_of_place = request.POST.get("name_of_place")
+        print(name_of_place)
         date_of_visit = request.POST.get("date")
         rating = request.POST.get("rating")
         liked_most = request.POST.getlist("likedMost")  # Get list of selected options
@@ -95,8 +97,8 @@ def feedback(request):
         overall_experience = request.POST.get("overallExperience")
 
         # Save the data to the Review model or perform other actions as needed
-        review = ReviewForm(
-            name=name,
+        review = Review(
+            name_of_place=name_of_place,
             date_of_visit=date_of_visit,
             rating=rating,
             liked_most=", ".join(liked_most),
@@ -105,11 +107,8 @@ def feedback(request):
         )
         review.save()
 
-        # Print the review object (optional)
-        print(review)
-
         # Redirect to a success page or do something else
-        return redirect("main")
+        return redirect("main_page")
 
     return render(request, "feedback.html")
     # return render(request, 'feedback.html')

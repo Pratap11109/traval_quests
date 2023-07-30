@@ -22,10 +22,9 @@ class BudgetPlanner(models.Model):
         return f"{self.theme} - {self.end_date}"
 
 class Review(models.Model):
-    name = models.CharField(max_length=100)
+    name_of_place = models.CharField(max_length=100)
     date_of_visit = models.DateField()
     rating = models.PositiveIntegerField()
-    
     # Choices for "What did you like most about the place?"
     LIKED_CHOICES = [
         ('Beautiful Scenery', 'Beautiful Scenery'),
@@ -56,5 +55,5 @@ class Review(models.Model):
     overall_experience = models.CharField(max_length=20, choices=EXPERIENCE_CHOICES)
 
     def __str__(self):
-        return f"{self.name}'s Review"
+        return f"{self.name_of_place}'s Review"
     
