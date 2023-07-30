@@ -14,6 +14,7 @@ class TravelGroup(models.Model):
 class BudgetPlanner(models.Model):
     budget = models.DecimalField(max_digits=10, decimal_places=2, null=True, default=None)
     theme = models.CharField(max_length=100, null=True, default=None)
+    current_location = models.CharField(max_length=100, null=True, default=None)
     num_days = models.PositiveIntegerField(null=True, default=None)
     end_date = models.DateField(null=True, default=None)
     start_date = models.DateField(null=True, default=None)
