@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Destination List</title>
+  <style>
+    /* Custom CSS styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      padding: 20px;
+      background-image: url('path_to_your_background_image.jpg');
+    }
+    .destination {
+      cursor: pointer;
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 10px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease-in-out;
+    }
+    .destination:hover {
+      background-color: #f9f9f9;
+    }
+    .destination h2 {
+      margin-top: 0;
+    }
+    .destination-content {
+      display: none;
+      margin-top: 10px;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+    }
+    .destination-content h3 {
+      margin-bottom: 5px;
+    }
+    .destination-content p {
+      margin-bottom: 5px;
+    }
+    .budget-input,
+    .duration-input {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-center mb-4">Destination List</h1>
+    {% for item in context %}
+    <div class="destination" onclick="toggleContent(item)">
+      <h2>Destination 1</h2>
+      <div class="destination-content" id={{"destination" + item}}>
+        <h3>Budget:</h3>
+        <span type="text" id={{ item }} ></span>
+        <h3>Total Duration:</h3>
+        <span type="text" id={{ item }}></span>
+        <h3>Itinerary Template:</h3>
+        <p>Day 1: [Itinerary details]</p>
+        <p>Day 2: [Itinerary details]</p>
+        <!-- Add more itinerary details as needed -->
+      </div>
+    </div>
+     {% endfor %}
+    {% comment %} <div class="destination" onclick="toggleContent(2)">
+      <h2>Destination 2</h2>
+      <div class="destination-content" id="destination2">
+        <h3>Budget:</h3>
+        <span type="text" id="budget2"></span>
+        <h3>Total Duration:</h3>
+        <span type="text" id="duration2"></span>
+        <h3>Itinerary Template:</h3>
+        <p>Day 1: [Itinerary details]</p>
+        <p>Day 2: [Itinerary details]</p>
+        <!-- Add more itinerary details as needed -->
+      </div>
+    </div> {% endcomment %}
+
+    <!-- Add more destination entries as needed -->
+  </div>
+
+  <!-- Add JavaScript code for expandable behavior -->
+  <script>
+    function toggleContent(destinationNumber) {
+      var destinationContent = document.getElementById("destination" + destinationNumber);
+
+      // Close all destination contents
+      var allDestinationContents = document.querySelectorAll(".destination-content");
+      for (var i = 0; i < allDestinationContents.length; i++) {
+        allDestinationContents[i].style.display = "none";
+      }
+
+      // Open the clicked destination content
+      if (destinationContent.style.display === "none") {
+        destinationContent.style.display = "block";
+      } else {
+        destinationContent.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>
