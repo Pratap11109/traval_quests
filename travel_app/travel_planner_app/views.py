@@ -9,6 +9,7 @@ from django.contrib.auth.models import Group, User
 from django.contrib.auth.decorators import login_required
 from .models import BudgetPlanner, Review
 from .forms import ReviewForm
+from langchain.llms import OpenAI
 
 
 def index(request):
@@ -21,17 +22,6 @@ def login_view(request):
     return render(request, "login.html")
 
 
-# def signup(request):
-#     # Add view for the signup page
-#     if request.method == 'POST':
-#         username = request.POST.get('username')
-#         email = request.POST.get('email')
-#         password = request.POST.get('password')
-#         new_user = ExternalUser(username=username, email=email)
-#         new_user.set_password(password)
-#         new_user.save()
-#         return redirect('index')
-#     return render(request, 'signup.html')
 
 
 def main_page(request):
@@ -41,6 +31,7 @@ def main_page(request):
         num_days = request.POST.get("num-days")
         theme = request.POST.get("theme")
         budget = request.POST.get("budget")
+
         budget_plan = {
             "budget": budget,
             "theme": theme,
@@ -51,6 +42,22 @@ def main_page(request):
 
         budget_plan = BudgetPlanner(**budget_plan)
         budget_plan.save()
+        llm = OpenAI(temperature=0.6, openai_api_key="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")
+
+    # start_date = "12-08-2023"
+    # end_date = "12-08-2023"
+    # days = "4"
+    # budget = "5000"
+    # start_point = "Pune"
+    # chat_model = ChatOpenAI()
+    stri = llm( "Can you suggest a top 2 traveling plan for me? I'll be starting on {0} and ending on {1}. The trip will be for {2} days, and my budget is {3}rs, starting point is {4} give me list of destinations, only place name".format(start_date, end_date,num_days, budget, start_point))
+            
+    destinations_list = [destination.strip() for destination in stri.split('\n')]
+    result_list = []
+    for destination in destinations_list:
+        days_formate = """I'll be starting on {0} and ending on {1}. The trip will be for {2} days, and my budget is {3}, starting from {4} and the destination is {5}. Please include transportation options and a complete itinerary with paths to go to each destination give me in dict formate all details""".format(start_date, end_date,days,budget, start_point, destination)
+        result = llm(days_formate)
+        result_list.append({destination: result})
         return  render(request, "feedback.html")
         # Do something with the form data (e.g., save to database, perform some action)
         # ...
@@ -157,3 +164,44 @@ def trip_with_strangers(request):
         "joined_groups": joined_groups,
     }
     return render(request, "trip_with_strangers.html", context)
+
+
+def output(request):
+    
+
+    llm = OpenAI(temperature=0.6, openai_api_key="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")
+
+    start_date = "12-08-2023"
+    end_date = "12-08-2023"
+    days = "4"
+    budget = "5000"
+    start_point = "Pune"
+    # chat_model = ChatOpenAI()
+    stri = llm( "Can you suggest a top 10 traveling plan for me? I'll be starting on {0} and ending on {1}. The trip will be for {2} days, and my budget is {3}rs, starting point is {4} give me list of destinations, only place name".format(start_date, end_date,days,budget, start_point))
+            
+    destinations_list = [destination.strip() for destination in stri.split('\n')]
+    result_list = []
+    for destination in destinations_list:
+        days_formate = """I'll be starting on {0} and ending on {1}. The trip will be for {2} days, and my budget is {3}, starting from {4} and the destination is {5}. Please include transportation options and a complete itinerary with paths to go to each destination give me in dict formate all details""".format(start_date, end_date,days,budget, start_point, destination)
+        result = llm(days_formate)
+
+
+        ans = {"day": []}
+
+        for key, value in result.items():
+            if "Day" in key:
+                ans["day"].append({key: value})
+            else:
+                ans[key] = value
+
+
+        result_list.append(ans)
+    
+    context = {
+        "result": result_list
+    }
+
+    print(result)
+    render(request, "trip_with_strangers.html", context)
+
+
