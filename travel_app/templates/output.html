@@ -53,18 +53,11 @@
 <body>
   <div class="container">
     <h1 class="text-center mb-4">Destination List</h1>
-    {% for item in context %}
+    {% for item in result_list %}
     <div class="destination" onclick="toggleContent(item)">
-      <h2>Destination 1</h2>
-      <div class="destination-content" id={{"destination" + item}}>
-        <h3>Budget:</h3>
-        <span type="text" id={{ item }} ></span>
-        <h3>Total Duration:</h3>
-        <span type="text" id={{ item }}></span>
-        <h3>Itinerary Template:</h3>
-        <p>Day 1: [Itinerary details]</p>
-        <p>Day 2: [Itinerary details]</p>
-        <!-- Add more itinerary details as needed -->
+          <div class="text-center mb-4">
+            {{ item }}
+          </div>
       </div>
     </div>
      {% endfor %}

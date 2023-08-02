@@ -40,6 +40,8 @@ def login_view(request):
 
 
 def main_page(request):
+    start_date, end_date, num_days, theme, current_location, budget = None, None, None, None, None, None
+
     if request.method == "POST":
         start_date = request.POST.get("start-date")
         end_date = request.POST.get("end-date")
@@ -56,26 +58,28 @@ def main_page(request):
             "end_date": end_date,
             "start_date": start_date
         }
-
+        start_point = current_location
         budget_plan = BudgetPlanner(**budget_plan)
         budget_plan.save()
-        llm = OpenAI(temperature=0.6, openai_api_key="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")
-
-    # start_date = "12-08-2023"
-    # end_date = "12-08-2023"
-    # days = "4"
-    # budget = "5000"
-    # start_point = "Pune"
-    # chat_model = ChatOpenAI()
-    stri = llm( "Can you suggest a top 2 traveling plan for me? I'll be starting on {0} and ending on {1}. The trip will be for {2} days, and my budget is {3}rs, starting point is {4} give me list of destinations, only place name".format(start_date, end_date,num_days, budget, start_point))
-            
-    destinations_list = [destination.strip() for destination in stri.split('\n')]
-    result_list = []
-    for destination in destinations_list:
-        days_formate = """I'll be starting on {0} and ending on {1}. The trip will be for {2} days, and my budget is {3}, starting from {4} and the destination is {5}. Please include transportation options and a complete itinerary with paths to go to each destination give me in dict formate all details""".format(start_date, end_date,days,budget, start_point, destination)
-        result = llm(days_formate)
-        result_list.append({destination: result})
-        return  render(request, "feedback.html")
+        llm = OpenAI(temperature=0.6, openai_api_key="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")
+       
+        stri = llm( "Can you suggest a top 2 traveling plan for me? I'll be starting on {0} and ending on {1}. The trip will be for {2} days, and my budget is {3}rs, starting point is {4} give me list of destinations, only place name".format(start_date, end_date,num_days, budget, start_point))
+        print(stri)
+        print("===========================================================================")
+        destinations_list = [destination.strip() for destination in stri.split('\n')]
+        print(destinations_list)
+        print("8888888888888888888888888888888888888888888888888888888888888888888888888")
+        result_list = []
+        for destination in destinations_list:
+            if (not destination) or destination == "":
+                continue
+            days_formate = """I'll be starting on {0} and ending on {1}. The trip will be for {2} days, and my budget is {3}, starting from {4} and the destination is {5}. Please include transportation options and a complete itinerary with paths to go to each destination give me in dict formate all details""".format(start_date, end_date,num_days,budget, start_point, destination)
+            result = llm(days_formate)
+            print(result)
+            print("*"*10)
+            result_list.append({destination: result})
+        print(result_list)
+        return  render(request, "output.html", {"result_list": result_list})
         # Do something with the form data (e.g., save to database, perform some action)
         # ...
 
@@ -100,12 +104,12 @@ def signup(request):
     return render(request, "signup.html", {"form": form})
 
 
-@login_required(login_url="login")
+# @login_required(login_url="login")
 def input_page(request):
     # Add view for the input page
     return render(request, "main.html")
 
-@login_required(login_url="login")
+# @login_required(login_url="login")
 def feedback(request):
     # Add view for the input page
     if request.method == "POST":
@@ -132,25 +136,25 @@ def feedback(request):
 
     return render(request, "feedback.html")
 
-@login_required(login_url="login")
+# @login_required(login_url="login")
 def output_page(request):
     # Add view for the output page
     return HttpResponse("output page")
 
 
-@login_required(login_url="login")
+# @login_required(login_url="login")
 def automated_plan(request):
     # Add view for the automated travel plan
     return HttpResponse("automated-plan")
 
 
-@login_required(login_url="login")
+# @login_required(login_url="login")
 def customized_plan(request):
     # Add view for the customized travel plan
     return HttpResponse("customized-plan")
 
 
-@login_required(login_url="login")
+# @login_required(login_url="login")
 def trip_with_strangers(request):
     if request.method == "POST":
         # Process the form submission and handle user requests to join the travel group
